@@ -98,6 +98,12 @@ button {
 #copyButton {
     border-color: greenyellow;
 }
+.links{
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
 
 @media (max-width: 1000px) {
 
