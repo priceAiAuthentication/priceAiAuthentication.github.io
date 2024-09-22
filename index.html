@@ -12,7 +12,7 @@
 
 </head>
 
-<body >
+<body>
     <h1>PriceAi Authentication Tool</h1>
     <div class="main_div">
         <div class="connectButton">
@@ -58,6 +58,10 @@
                 else {
                     document.getElementById('connectButton').style.display = 'block';
                 }
+            }
+            else if (/Mobi|Android/i.test(navigator.userAgent)) {
+                // If the user is on a mobile device and MetaMask isn't detected
+                document.getElementById('message').textContent = "Please open this dApp in the MetaMask app.";
             } else {
                 document.getElementById('message').textContent = "Please install MetaMask!";
             }
