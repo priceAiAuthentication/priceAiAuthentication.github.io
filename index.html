@@ -62,6 +62,7 @@
             else if (/Mobi|Android/i.test(navigator.userAgent)) {
                 // If the user is on a mobile device and MetaMask isn't detected
                 document.getElementById('message').textContent = "Please open this dApp in the MetaMask app.";
+                <a href="metamask://dapp/https://example.com">Open in MetaMask</a>
             } else {
                 document.getElementById('message').textContent = "Please install MetaMask!";
             }
