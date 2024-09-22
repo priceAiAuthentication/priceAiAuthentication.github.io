@@ -4,21 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Message with MetaMask</title>
+    <title>PriceAi Authentication</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
 </head>
 
-<body>
-    <h1>Sign Message with MetaMask</h1>
-    <button id="connectButton">Connect Wallet</button>
-    <div>
+<body >
+    <h1>PriceAi Authentication Tool</h1>
+    <div class="main_div">
+        <div class="connectButton">
+            <button id="connectButton" style="display: block;">Connect Wallet</button>
+        </div>
+
+
         <div id="inputContainer" style="display: none;">
-            <label for="messageInput">Message to sign:</label>
-            <input type="text" id="messageInput" placeholder="Enter your message here" />
+            <label id="messageInputIN" for="messageInput">Message to sign:</label>
+            <input type="text" id="messageInput" placeholder="bot provided text here ..." />
+        </div>
+
+        <div class="signButton">
+            <button id="signButton" style="display: none;">Sign Message</button>
         </div>
 
     </div>
-    <button id="signButton" style="display: none;">Sign Message</button>
-    <p id="message"></p>
+    <div style="display: block;" id="message"></div>
+    <div class="signButton">
+        <button id="copyButton" style="display: none;">Copy</button>
+    </div>
 
     <!-- Correct CDN link for ethers.js -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.6.0/dist/ethers.umd.min.js"></script>
@@ -31,12 +46,17 @@
             if (window.ethereum) {
                 // Check if MetaMask is installed
                 provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
                 const accounts = await provider.listAccounts();
                 if (accounts.length > 0) {
                     signer = provider.getSigner();
                     document.getElementById('signButton').style.display = 'block';
                     document.getElementById('inputContainer').style.display = 'block';
                     document.getElementById('message').textContent = "Wallet already connected!";
+                    document.getElementById('connectButton').style.display = 'none';
+                }
+                else {
+                    document.getElementById('connectButton').style.display = 'block';
                 }
             } else {
                 document.getElementById('message').textContent = "Please install MetaMask!";
@@ -62,19 +82,26 @@
         };
 
         document.getElementById('signButton').onclick = async () => {
+            document.getElementById('message').style.display = 'none';
+            document.getElementById('copyButton').style.display = 'none';
             const uniqueMessage = document.getElementById('messageInput').value; // Get the message from the input field
+            console.log(uniqueMessage)
             const address = await signer.getAddress();
 
             if (!uniqueMessage) {
-                document.getElementById('message').textContent = "Please enter a message to sign.";
+                document.getElementById('message').textContent = "Please enter a message to sign.fffffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+                document.getElementById('copyButton').style.display = 'block';
+                document.getElementById('message').style.display = 'block';
                 return;
             }
 
             try {
                 const signature = await signer.signMessage(uniqueMessage);
-                document.getElementById('message').textContent = `Signed message: ${signature}`;
+                document.getElementById('message').textContent = `${signature}`;
                 console.log(`Signature: ${signature}`);
                 console.log(`Address: ${address}`);
+                document.getElementById('copyButton').style.display = 'block';
+                document.getElementById('message').style.display = 'block';
             } catch (error) {
                 console.error(error);
             }
@@ -85,9 +112,31 @@
                 signer = null;
                 document.getElementById('signButton').style.display = 'none';
                 document.getElementById('inputContainer').style.display = 'none';
+                document.getElementById('connectButton').style.display = 'block';
             } else {
                 checkWalletConnection()
             }
+        });
+
+
+        document.getElementById("copyButton").addEventListener("click", function () {
+            // Get the text from the paragraph
+            const messageText = document.getElementById("message").innerText;
+
+            // Create a temporary textarea element to copy the text
+            const tempInput = document.createElement("textarea");
+            tempInput.value = messageText;
+            document.body.appendChild(tempInput);
+
+            // Select and copy the text
+            tempInput.select();
+            document.execCommand("copy");
+
+            // Remove the temporary element
+            document.body.removeChild(tempInput);
+
+            // Optionally, you can provide feedback that the text has been copied
+            alert("Text copied: " + messageText);
         });
     </script>
 </body>
