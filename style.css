@@ -1,16 +1,27 @@
 body {
-    margin: 0;  /* Removes default body margin */
-    padding: 0;  /* Removes default body padding */
-    background-color: #000;  /* Keeps the black background */
-    font-family: "Pixelify Sans", sans-serif;  /* Custom font with a fallback */
-    font-style: normal;  /* Regular font style */
-    overflow-x: hidden;  /* Prevents horizontal scrolling */
+    margin: 0;
+    /* Removes default body margin */
+    padding: 0;
+    /* Removes default body padding */
+    background-color: #000;
+    /* Keeps the black background */
+    font-family: "Pixelify Sans", sans-serif;
+    /* Custom font with a fallback */
+    font-style: normal;
+    /* Regular font style */
+    overflow-x: hidden;
+    /* Prevents horizontal scrolling */
     overflow-y: hidden;
-    box-sizing: border-box;  /* Ensures all padding/border is included in the element's width */
-    display: block;  /* Allows flexible positioning of elements */
-    justify-content: center;  /* Centers content horizontally */
-    align-items: center;  /* Centers content vertically */
-    min-height: 100vh;  /* Ensures the body takes up the full height of the viewport */
+    box-sizing: border-box;
+    /* Ensures all padding/border is included in the element's width */
+    display: block;
+    /* Allows flexible positioning of elements */
+    justify-content: center;
+    /* Centers content horizontally */
+    align-items: center;
+    /* Centers content vertically */
+    min-height: 100vh;
+    /* Ensures the body takes up the full height of the viewport */
 }
 
 h1 {
@@ -44,6 +55,22 @@ h1 {
     margin-bottom: 2%;
     margin-top: 2%;
 
+}
+
+
+.bot_access {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    /* //align-content: center; */
+    margin-bottom: 2%;
+    margin-top: 0%;
+    font-size: 10px;
+}
+
+#bot_access{
+    font-size: 20px;
+    border-color: aqua;
 }
 
 .connectButton {
@@ -98,14 +125,31 @@ button {
 #copyButton {
     border-color: greenyellow;
 }
-.links{
+
+.links {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
     color: white;
 }
 
+.information {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 80%;
+    color: rgb(174, 255, 99);
+}
+
 @media (max-width: 1000px) {
+    .information {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        width: 80%;
+        color: rgb(174, 255, 99);
+        font-size: 13px;
+    }
 
     h1 {
         text-align: center;
@@ -171,6 +215,7 @@ button {
         font-family: "Pixelify Sans", sans-serif;
         font-optical-sizing: auto;
         font-style: normal;
+        text-align: center;
     }
 
     #messageInput {
